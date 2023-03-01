@@ -899,21 +899,21 @@ async def enleech(event):
                     temp = int(temp)
                     temp2 = rep_event.id
                     while temp > 0:
-                        try:
-                            event2 = await bot.get_messages(event.chat_id, ids=temp2)
-                        except Exception:
-                            ers = traceback.format_exc()
-                            LOGS.info(ers)
-                            await channel_log(ers)
+                        event2 = await bot.get_messages(event.chat_id, ids=temp2)
+                        if event2 is None:
+                            if LOCKFILE:
+                                if LOCKFILE[0] == "leechlock":
+                                    LOCKFILE.clear()
                             return await event.reply(
-                                f"An error occurred probably due to longer number than uri messages\n\n**Actual Error**\n`{ers}`"
+                                f"Resend uri links and try replying the first with /l again"
                             )
                         uri = event2.text
                         if is_url(uri) is True and uri.endswith("torrent"):
                             pass
                         else:
                             if LOCKFILE:
-                                LOCKFILE.clear()
+                                if LOCKFILE[0] == "leechlock":
+                                    LOCKFILE.clear()
                             return await event2.reply("`Invalid torrent link`")
                         file_name = await get_leech_name(uri)
                         if file_name is None:
@@ -1013,6 +1013,9 @@ async def enleech(event):
         ers = traceback.format_exc()
         LOGS.info(ers)
         await channel_log(ers)
+        if LOCKFILE:
+            if LOCKFILE[0] == "leechlock":
+                LOCKFILE.clear()
         return await event.reply("An Unknown error Occurred.")
 
 
