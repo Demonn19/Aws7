@@ -270,7 +270,7 @@ async def parse(name, kk, aa):
             if fil2:
                 bb += f" [{fil2}]"
             bb2 = bb.replace(cb, b)
-            bb2 = bb2.replace("[A-M]", cb2)
+            bb2 = bb2.replace("[A-L]", cb2)
             if "1080" in nani:
                 bb2 += " | [1080p]"
             bb += ".mkv"
@@ -333,7 +333,7 @@ async def parse(name, kk, aa):
                 col = ""
                 cb = b
             bb = ""
-            bb += "[A-M]"
+            bb += "[A-L]"
             bb += f" {cb}"
             if c:
                 bb += f" S{c}"
