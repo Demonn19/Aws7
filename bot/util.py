@@ -222,7 +222,7 @@ async def parse(name, kk, aa):
         b, d, c, e, fil2, fil3, s, st = await parser(name)
         if b is None:
             raise Exception("Parsing Failed")
-        cb2 = "[ANi-MiNE]"
+        cb2 = "[@AnimeDubbed_1]"
         wnamer, wreleaser = await wfilter()
         with open("ffmpeg.txt", "r") as file:
             nani = file.read().rstrip()
@@ -259,7 +259,7 @@ async def parse(name, kk, aa):
             else:
                 cb = b
             bb = ""
-            bb += "[A-M]"
+            bb += "[A-L]"
             bb += f" {cb}"
             if c:
                 bb += f" S{c}"
@@ -346,14 +346,14 @@ async def parse(name, kk, aa):
             if col:
                 bb += f" [{col}]"
             bb2 = bb.replace(cb, b)
-            bb2 = bb2.replace("[A-M]", cb2)
+            bb2 = bb2.replace("[A-L]", cb2)
             if "1080" in nani:
                 bb2 += " | [1080p]"
             bb += ".mkv"
     except Exception:
         ers = traceback.format_exc()
         LOGS.info(ers)
-        bb = kk.replace(f".{aa}", " @Ani_Mine.mkv")
+        bb = kk.replace(f".{aa}", " @AnimeDubbed_1.mkv")
         bb2 = bb
     if "/" in bb:
         bb = bb.replace("/", " ")
@@ -516,11 +516,11 @@ async def custcap(name, fname):
             encr = ENCODER.replace("@", "")
             caption += f"**{cdp} Encoder:** `{encr}`\n"
         caption += f"**{cdp} CRC32:** `[{crc32s}]`\n"
-        caption += "**🔗 @ANi_MiNE**"
+        caption += "**🔗 @AnimeDubbed_1**"
     except Exception:
         ers = traceback.format_exc()
         LOGS.info(ers)
         om = fname.split(".")[0]
         ot = om.split("@")[0]
-        caption = f"**{ot}**\n**🔗 @Ani_Mine**"
+        caption = f"**{ot}**\n**🔗 @AnimeDubbed_1**"
     return caption
