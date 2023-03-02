@@ -4,7 +4,7 @@
 # ==============================================================================
 FROM openvino/ubuntu20_data_runtime
 USER root
-RUN apt-get update && apt-get -y upgrade e
+RUN apt-get update && apt-get -y upgrade
 WORKDIR /bot
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Africa/Lagos
