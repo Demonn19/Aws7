@@ -1,5 +1,6 @@
 aiohttp
 anitopy
+youtube-dl
 country_converter
 python-decouple
 psutil
