@@ -511,7 +511,7 @@ async def custcap(name, fname):
         if st:
             caption += f"**{cdp} Episode Title:** `{st}`\n"
         if "1080" in nani:
-            caption += f"**🌟:** `[1080p] [AV1]`\n"
+            caption += f"**🌟:** `[1080p//HEVC]`\n"
         if ENCODER:
             encr = ENCODER.replace("@", "")
             caption += f"**{cdp} Encoder:** `{encr}`\n"
