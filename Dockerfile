@@ -16,7 +16,10 @@ RUN apt-get update && \
     rm -rf ffmpeg-n5.1-latest-linux64-gpl-5.1 && \
     export PATH=$PATH:/usr/local/bin && \
     rm -rf /var/lib/apt/lists/*
-    
+
+SHELL ["/bin/bash", "-c"]
+RUN conda init bash
+
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
     rm Miniconda3-latest-Linux-x86_64.sh && \
