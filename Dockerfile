@@ -17,21 +17,14 @@ RUN apt-get update && \
     export PATH=$PATH:/usr/local/bin && \
     rm -rf /var/lib/apt/lists/*
 
-SHELL ["/bin/bash", "-c"]
-RUN conda init bash
-
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
     rm Miniconda3-latest-Linux-x86_64.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
-
-RUN /opt/conda/bin/conda create -y --name bot python=3.10 && \
-    /opt/conda/bin/conda activate bot
-
-COPY . .
-
-RUN /opt/conda/bin/conda install -y -c conda-forge --name bot --file requirements.txt
+    echo "conda activate base" >> ~/.bashrc && \
+    /opt/conda/bin/conda create -y --name bot python=3.10 && \
+    /opt/conda/bin/conda activate bot && \
+    /opt/conda/bin/conda install -y -c conda-forge --name bot --file requirements.txt
 
 CMD ["/bin/bash", "-c", "source activate bot && bash run.sh"]
