@@ -31,6 +31,9 @@ RUN /opt/conda/bin/conda create -y --name bot python=3.10 && \
 
 COPY . .
 
-RUN /opt/conda/bin/conda install -y -c conda-forge --name bot --file requirements.txt
+RUN /opt/conda/bin/conda install -y -c conda-forge --name bot --file requirements.txt && \
+    conda clean --all --force-pkgs-dirs --yes && \
+    rm -rf /root/.cache/pip/* && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["/bin/bash", "-c", "source activate bot && bash run.sh"]
