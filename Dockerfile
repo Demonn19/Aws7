@@ -7,7 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
 
 RUN apt-get update && \
-    apt-get install -y git aria2 qbittorrent-nox bash xz-utils wget curl pv jq python3.10 python3-dev python3-pip mediainfo libssl-dev && \
+    apt-get install -y git aria2 qbittorrent-nox bash xz-utils wget curl pv jq python3.10 python3-dev python3-pip mediainfo libssl-dev ca-certificates && \
+    update-ca-certificates && \
+    wget https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
+    tar -xvf ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
+    cp ffmpeg-n5.1-latest-linux64-gpl-5.1/bin/* /usr/bin && \
+    rm -rf ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
+    rm -rf ffmpeg-n5.1-latest-linux64-gpl-5.1 && \
     export PATH=$PATH:/usr/local/bin && \
     rm -rf /var/lib/apt/lists/*
 
