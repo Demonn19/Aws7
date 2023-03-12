@@ -516,11 +516,11 @@ async def custcap(name, fname):
             encr = ENCODER.replace("@", "")
             caption += f"**{cdp} Encoder:** `{encr}`\n"
         caption += f"**{cdp} CRC32:** `[{crc32s}]`\n"
-        caption += "**🔗 @AnimeDubbed_1**"
+        caption += "**🔗 @AnimeDubbed_1 \n ⚡️Click here to support us :  https://link.tnlink.in/animelover **"
     except Exception:
         ers = traceback.format_exc()
         LOGS.info(ers)
         om = fname.split(".")[0]
         ot = om.split("@")[0]
-        caption = f"**{ot}**\n**🔗 @AnimeDubbed_1**"
+        caption = f"**{ot}**\n**🔗 @AnimeDubbed_1 \n ⚡️Click here to support us :  https://link.tnlink.in/animelover **"
     return caption
