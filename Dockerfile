@@ -32,11 +32,9 @@ COPY requirements.txt .
 RUN conda create --name bot python=3.10 -y && \
     conda init bash && \
     echo "conda activate bot" >> ~/.bashrc && \
-    /opt/conda/bin/conda install -c conda-forge --name bot --file requirements.txt -y && \
-    conda clean --all --force-pkgs-dirs --yes && \
-    rm -rf /root/.cache/pip/* && \
-    rm -rf /var/lib/apt/lists/*
-
+    conda install -c conda-forge --name bot --file requirements.txt -y && \
+    
 COPY . .
 
 CMD ["/bin/bash", "-c", "conda activate bot && bash run.sh"]
+
