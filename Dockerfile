@@ -25,9 +25,9 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
     echo "conda activate base" >> ~/.bashrc && \
     export PATH=$PATH:/opt/conda/bin
 
-RUN /opt/conda/bin/conda create -y --name bot python=3.10 && \
-    /bin/bash -c "conda activate bot" && \
-    /opt/conda/bin/conda install -y -c conda-forge --name bot --file requirements.txt
+RUN conda create -y --name bot python=3.10 && \
+    conda activate bot && \
+    conda install -y -c conda-forge --name bot --file requirements.txt
 
 COPY . .
 
