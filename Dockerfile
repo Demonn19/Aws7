@@ -1,40 +1,11 @@
-FROM ubuntu:20.04
-
+#FROM python:3.9.2-slim-buster
+FROM fedora:37
 RUN mkdir /bot && chmod 777 /bot
 WORKDIR /bot
-
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/New_York
-
-RUN apt-get update && \
-    apt-get install -y git aria2 qbittorrent-nox bash xz-utils wget curl pv jq python3.10 python3-dev python3-pip mediainfo libssl-dev ca-certificates && \
-    update-ca-certificates && \
-    wget https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
-    tar -xvf ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
-    cp ffmpeg-n5.1-latest-linux64-gpl-5.1/bin/* /usr/bin && \
-    rm -rf ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && \
-    rm -rf ffmpeg-n5.1-latest-linux64-gpl-5.1 && \
-    export PATH=$PATH:/usr/local/bin && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
-    rm Miniconda3-latest-Linux-x86_64.sh && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc && \
-    export PATH=$PATH:/opt/conda/bin
-
-ENV PATH="/opt/conda/bin:${PATH}"
-
-COPY requirements.txt .
-
-RUN conda create --name bot python=3.10 -y && \
-    conda init bash && \
-    echo "conda activate bot" >> ~/.bashrc && \
-    conda install -c conda-forge --name bot --file requirements.txt -y && \
-    
+ENV TZ=Africa/Lagos
+RUN yum -qq -y update && yum -qq -y install git aria2 bash xz wget curl pv jq python3-pip mediainfo && dnf -qq -y install procps-ng && python3 -m pip install --upgrade pip
+RUN wget https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n5.1-latest-linux64-gpl-5.1.tar.xz && tar -xvf *xz && cp *5.1/bin/* /usr/bin && rm -rf *xz && rm -rf *5.1
 COPY . .
-
-CMD ["/bin/bash", "-c", "conda activate bot && bash run.sh"]
-
+RUN pip3 install -r requirements.txt
+CMD ["bash","run.sh"]
